@@ -1,3 +1,7 @@
+
+SET LINESIZE <set print page length>;
+set PAGESIZE 200;
+
 -- 1. Create table product (pid,pname,unitprice,manufacturer,category,country).
 CREATE TABLE product (
     pid NUMBER,
@@ -12,11 +16,11 @@ DESC product;
 
 -- 2. Populate the table and display the details.
 INSERT INTO product VALUES (&pid, '&pname', &unitprice, '&manufacturer', '&category', '&country');
--- PID  PNAME       UNITPRICE  MANUFACTURER  CATEGORY         COUNTRY
--- 123  Laptop      1000       Dell          Electronics      USA
--- 234  Lenovo      800        Samsung       Electronics      South Korea
--- 200  Watch       200        Casio         Fashion          Japan
--- 467  Iron box    300        Thoshiba      home appliances  USA
+-- PID  PNAME     UNITPRICE  MANUFACTURER  CATEGORY         COUNTRY
+-- 123  Laptop    1000       Dell          Electronics      USA
+-- 234  Lenovo    800        Samsung       Electronics      South Korea
+-- 200  Watch     200        Casio         Fashion          Japan
+-- 467  Iron box  300        Thoshiba      home appliances  USA
 
 SELECT * FROM product;
 
@@ -28,18 +32,17 @@ FROM product;
 SELECT * FROM v1;
 
 -- 4. List the pname and country of all products whose category is ‘home appliances’ using views.
-CREATE VIEW view2 AS
-SELECT pname, country
+SELECT pname, country 
 FROM product
-WHERE category = 'home appliances';
-
-SELECT * FROM view2;
+WHERE pid = (SELECT pid
+FROM v1
+WHERE category = 'home appliances');
 
 -- 5. Populate v1 with values 501, XY505, mobilephone.
-INSERT INTO product VALUES (&pid, '&pname', &unitprice, '&manufacturer', '&category', '&country');
+INSERT INTO v1 VALUES (&pid, '&pname','&category');
 
--- PID  PNAME  UNITPRICE  MANUFACTURER  CATEGORY     COUNTRY
--- 501  XY505  1000       Dell          mobilephone  USA
+-- PID  PNAME  CATEGORY   
+-- 501  XY505  mobilephone
 
 SELECT * FROM v1;
 
@@ -63,12 +66,12 @@ SELECT pid, unitprice, category
 FROM product;
 
 SELECT * FROM v2;
-
+	
 -- 10.Populate v2 with a row.
-INSERT INTO product VALUES (&pid, '&pname', &unitprice, '&manufacturer', '&category', '&country');
+INSERT INTO v2 VALUES (&pid, &unitprice, '&category');
 
--- PID  PNAME    UNITPRICE  MANUFACTURER  CATEGORY  COUNTRY
--- 505  ThinkPad 1000       Lenovo        Laptop    USA
+-- PID  UNITPRICE CATEGORY
+-- 505  1000      Laptop  
 
 SELECT * FROM v2;
 
@@ -122,7 +125,7 @@ ON employee.dept_id = department.dept_id;
 SELECT * FROM v3;
 
 -- 13.Modify the salary of all employees who belong to dept 10 by rupees 1000.
-UPDATE employee
+UPDATE v3
 SET salary = salary + 1000
 WHERE dept_id = 10;
 
@@ -144,8 +147,10 @@ ADD FOREIGN KEY (dept_id) REFERENCES department(dept_id);
 DESC employee;
 
 -- 16.Insert a row to v3.
+INSERT INTO v3 VALUES (&eid, '&ename', &salary, &dept_id, '&dept_name');
+-- EID  ENAME   SALARY  DEPT_ID DEPT_NAME
+-- 5    George  70000   13      Sales
+
 INSERT INTO employee VALUES (&eid, '&ename', &salary, &dept_id);
--- EID  ENAME   SALARY  DEPT_ID
--- 5    George  70000   13
 
 SELECT * FROM v3;
