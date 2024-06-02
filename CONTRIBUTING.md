@@ -9,7 +9,7 @@ First off, thank you for considering contributing to our project! Your help is g
 Fork the repository to your own GitHub account and then clone it to your local device.
 
 ```sh
-git clone https://github.com/joeljtomy/ktu_lab.git
+git clone https://github.com/your-username/ktu_lab.git
 ```
 
 ### 2. Create a Branch
