@@ -1,15 +1,6 @@
 import java.util.Random;
 import java.util.Scanner;
 
-public class Threads {
-
-  public static void main(String args[]) {
-    new RandomNumberGenerator().start();
-    new Square().start();
-    new Cube().start();
-  }
-}
-
 class RandomNumberGenerator extends Thread {
 
   public void run() {
@@ -47,5 +38,14 @@ class Cube extends Thread {
 
   static void calculate(int number) {
     System.out.println("Cube of " + number + " = " + number * number * number);
+  }
+}
+
+public class Threads {
+
+  public static void main(String args[]) {
+    new RandomNumberGenerator().start();
+    new Square().start();
+    new Cube().start();
   }
 }

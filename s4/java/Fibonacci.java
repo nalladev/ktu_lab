@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class FibonacciSeries {
+public class Fibonacci {
 
   void series(int count) {
     int first = 0, second = 1;

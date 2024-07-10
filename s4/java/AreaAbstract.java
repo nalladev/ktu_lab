@@ -19,7 +19,7 @@ class Rectangle extends Shape {
   }
 
   void printArea() {
-    System.out.println("Reactangle area = " + dimension1 * dimension2);
+    System.out.println("Rectangle area = " + dimension1 * dimension2);
   }
 }
 

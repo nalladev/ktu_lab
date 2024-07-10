@@ -1,5 +1,9 @@
 import java.util.Scanner;
 
+class StackOverflowException extends Exception {}
+
+class StackUnderflowException extends Exception {}
+
 public class StackException {
 
   int size, top;
@@ -17,7 +21,7 @@ public class StackException {
         array[++top] = value;
         System.out.println(value + " Pushed to stack.");
       } else {
-        throw new StackOverflowException();
+        throw new StackOverflowException();w
       }
     } catch (StackOverflowException e) {
       System.out.println(e);
@@ -88,5 +92,3 @@ public class StackException {
     }
   }
 }
-class StackOverflowException extends Exception {}
-class StackUnderflowException extends Exception {}
